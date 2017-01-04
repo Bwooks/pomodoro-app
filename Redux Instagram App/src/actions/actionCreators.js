@@ -1,4 +1,6 @@
-//increment
+//Action creators that emit actions to reducers and pass on their payloads to help update state
+
+//increment number of likes
 export function increment(index){
 	return {
 		type:"INCREMENT_LIKES",

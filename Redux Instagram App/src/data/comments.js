@@ -61,6 +61,8 @@ const comments = {
       "user": "world_greg"
     }
   ],
+ //Data courtesy of Wes Bos
+
   "BAF_KY4wcRY":[
     {
       "text":"Looking great Wes! I'd like to see the other side of the room too.",

@@ -13,9 +13,11 @@ import PhotoGrid from './components/PhotoGrid';
 //import react router dependencies
 import {Router,Route,IndexRoute,browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
+//get the default state and expose it to the Provider
 import store, {history} from './store';
 
 const router = (
+	//Provider distributes state down to the child components
 	<Provider store={store}>
 	<Router history={history}>
 		<Route path="/" component={App}>

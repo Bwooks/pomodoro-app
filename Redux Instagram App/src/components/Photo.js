@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
+//Component that models a single post and provides at-a-glance info based on provided props (i.e, likes, comments and pictures)
+//Component is "smart" (accesses store/state indirectly by triggering action creators) and emits actions to reducers based on user input (liking pictures for example)
 class Photo extends React.Component{
 	render(){
 		const {post,index,comments} = this.props;
@@ -25,7 +27,7 @@ class Photo extends React.Component{
 						<div className='control-buttons'>
 							<button 
 							className='likes'
-							onClick={this.props.increment.bind(null,index)}
+							onClick={this.props.increment.bind(this,index)}
 							>&hearts; {post.likes}</button>
 							<Link className='button' to={`/view/${post.code}`}>
 								<span className='comment-count'>
