@@ -13,13 +13,22 @@ class UserDelete extends React.Component{
     })
   }
 
+  userDelete(event){
+    const {id} = this.props.modal_delete;
+    this.props.dispatch({
+      type:'user.Delete',
+      id:id
+    });
+    this.modalDeleteHide();
+  }
+
   render(){
     const {show,username} = this.props.modal_delete;
     return(
       <Modal show={show}>
         <Modal.Header>Are you sure you want to delete {username}?</Modal.Header>
         <Modal.Footer>
-          <Button bsStyle="primary">Yes</Button>
+          <Button onClick={this.userDelete.bind(this)} bsStyle="primary">Yes</Button>
           <Button onClick={this.modalDeleteHide.bind(this)}>No</Button>
         </Modal.Footer>
       </Modal>
