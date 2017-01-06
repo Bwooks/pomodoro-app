@@ -17,7 +17,7 @@ class UserDelete extends React.Component{
     const {id} = this.props.modal_delete;
     this.props.dispatch({
       type:'user.Delete',
-      id:id
+      id:Number(id)
     });
     this.modalDeleteHide();
   }
@@ -26,7 +26,7 @@ class UserDelete extends React.Component{
     const {show,username} = this.props.modal_delete;
     return(
       <Modal show={show}>
-        <Modal.Header>Are you sure you want to delete {username}?</Modal.Header>
+        <Modal.Header>Are you sure you want to delete <strong>{username}</strong>?</Modal.Header>
         <Modal.Footer>
           <Button onClick={this.userDelete.bind(this)} bsStyle="primary">Yes</Button>
           <Button onClick={this.modalDeleteHide.bind(this)}>No</Button>

@@ -4,20 +4,19 @@
 import React from 'react';
 import {Button, Glyphicon} from 'react-bootstrap';
 import {connect} from 'react-redux';
-
+import {Link} from 'react-router';
 class UserListElement extends React.Component{
 
   constructor(props){
     super(props);
   }
 
-  modalDeleteShow(event){
-    const username = event.target.dataset.username;
-    const user_id = Number(event.target.dataset.id);
+  modalDeleteShow(id,username,event){
+
     this.props.dispatch({
       type:"users.modalDeleteShow",
       username:username,
-      id:user_id
+      id:id
     });
   }
 
@@ -28,11 +27,11 @@ class UserListElement extends React.Component{
         <td>{user.id}</td>
         <td>{user.username}</td>
         <td>{user.job}</td>
-        <td><a href={`/user-edit/${user.id}`}><Button bsSize="small">
+        <td><Link to={`/user-edit/${user.id}`}><Button bsSize="small">
           Edit <Glyphicon glyph="edit"/>
-        </Button></a>
+        </Button></Link>
         </td>
-        <td><Button onClick={this.modalDeleteShow.bind(this)} bsSize="xsmall" data-id={user.id} data-username={user.username}>
+        <td><Button onClick={this.modalDeleteShow.bind(this,user.id,user.username)} bsSize="xsmall" data-id={user.id} data-username={user.username}>
           Delete <Glyphicon glyph="remove-circle"/>
         </Button>
         </td>

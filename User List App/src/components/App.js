@@ -2,7 +2,7 @@
  * Created by Owner on 1/4/2017.
  */
 import React from 'react';
-import UserList from './UserList'
+import Menu from './Menu';
 export default class App extends React.Component{
 
   render(){
@@ -10,7 +10,12 @@ export default class App extends React.Component{
     return (
       //display these users in a table
       <div className="container">
-       <UserList/>
+        <div className="row">
+          <Menu />
+        </div>
+        <div className="row">
+          {this.props.children}
+        </div>
       </div>
       );
   }

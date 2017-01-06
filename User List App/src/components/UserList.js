@@ -3,13 +3,24 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Table} from 'react-bootstrap';
+import {Table,Pagination} from 'react-bootstrap';
+import {push} from 'react-router-redux';
+
 import UserListElement from './UserListElement';
 import UserDelete from './UserDelete';
-
 class UserList extends React.Component{
+
+  changePage(page){
+    this.props.dispatch(push("/?page=" + page));
+
+  }
   render(){
     const {users} = this.props;
+    const per_page = 10;
+    const pages = Math.ceil(users.length/per_page);
+    const current_page = this.props.page;
+    const start_offset = (current_page-1) * per_page;
+    let counter = 0;
     return (
       <div>
         <Table bordered responsive striped>
@@ -24,12 +35,18 @@ class UserList extends React.Component{
           </thead>
           <tbody>
           {users.map((user,index)=>{
-            return (
-              <UserListElement key={user.id} user={user}/>
-            );
+            if(index >= start_offset && counter < per_page){
+              counter++;
+              return (<UserListElement key={user.id} user={user}/>);
+            }
           })}
           </tbody>
         </Table>
+
+        <Pagination className="user-pagination pull-right" bsSize="medium"
+                    maxButtons={10} first last next prev boundaryLinks
+                    items={pages} activePage={current_page} onSelect={this.changePage.bind(this)}/>
+
         <UserDelete/>
       </div>
     );
@@ -38,8 +55,9 @@ class UserList extends React.Component{
 
 function mapStateToProps(state){
   return{
-    users:state.users.list
-  }
+    users:state.users.list,
+    page:Number(state.routing.locationBeforeTransitions.query.page) || 1
+  };
 }
 
 export default connect(mapStateToProps)(UserList);
